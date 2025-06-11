@@ -20,7 +20,7 @@ jobs:
         script: |
           set -e
           if [ ! -d ~/soar-workflow ]; then
-              git clone https://github.com:duduuu/soar-workflow.git ~/soar-workflow
+              git clone https://github.com/duduuu/soar-workflow.git ~/soar-workflow
           fi
           cd ~/soar-workflow
           git pull
