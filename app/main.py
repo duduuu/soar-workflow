@@ -12,7 +12,11 @@ async def webhook(event: Event, bg: BackgroundTasks):
     logging.info("Event received: %s", event.model_dump())
 
     async def triage():
-        score = await score_ip(str(event.src_ip))
+        try:
+            score = await score_ip(str(event.src_ip))
+        except Exception as e:
+            logging.error("Error scoring IP %s: %s", event.src_ip, e)
+            score = 0
         logging.info("IP Score: %s", score)
         if score >= 50:
             await send_slack(f":rotating_light: 악성 IP 탐지 ➡ {event.src_ip} (score={score})")
